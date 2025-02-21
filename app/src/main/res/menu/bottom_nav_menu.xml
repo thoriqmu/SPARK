@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:title="Home"
         android:icon="@drawable/ic_home" />
 
     <item
-        android:id="@+id/chat"
+        android:id="@+id/chatFragment"
         android:title="Chat"
         android:icon="@drawable/ic_chat" />
 
@@ -16,12 +16,12 @@
         android:title="" />
 
     <item
-        android:id="@+id/notification"
+        android:id="@+id/notificationFragment"
         android:title="Notification"
         android:icon="@drawable/ic_notification" />
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:title="Profile"
         android:icon="@drawable/ic_profile" />
 
