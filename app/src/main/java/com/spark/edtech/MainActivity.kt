@@ -18,13 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            fun loadFragment(fragment: Fragment) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment, fragment)
-                    .commit()
-            }
+        loadFragment(HomeFragment())
 
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeFragment -> loadFragment(HomeFragment())
                 R.id.chatFragment -> loadFragment(ChatFragment())
@@ -34,6 +30,12 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
 
+    private fun loadFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.commit()
     }
 }

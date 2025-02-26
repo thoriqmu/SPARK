@@ -3,7 +3,18 @@
     <style name="Base.Theme.SPARK" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:fontFamily">@font/montserrat</item>
+
     </style>
 
     <style name="Theme.SPARK" parent="Base.Theme.SPARK" />
+    
+    <style name="fab_3_rounded">
+        <item name="cornerSize">50%</item>
+    </style>
+    
+    <style name="image_rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
