@@ -63,6 +63,7 @@
         android:elevation="10dp"
         android:paddingStart="25dp"
         android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:paddingEnd="25dp"
         app:layout_constraintTop_toBottomOf="@+id/layout_private_chat"
         tools:layout_editor_absoluteX="30dp">
@@ -72,8 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Just between us!"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,15 +86,16 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:text="Share your thoughts, questions, or seek personal feedback on your speaking progress in a private space."
-            android:textSize="11sp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/iv_flower_chat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_private_chat_top" />
 
         <ImageView
             android:id="@+id/iv_flower_chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:src="@drawable/flower"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +134,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@id/recent_chat_text"
+            android:id="@+id/recent_chat_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Let's study together in the English room"
@@ -196,6 +199,7 @@
         android:elevation="10dp"
         android:paddingStart="25dp"
         android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:paddingEnd="25dp"
         app:layout_constraintTop_toBottomOf="@+id/layout_community">
 
@@ -204,8 +208,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Share yours!"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -216,15 +221,16 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:text="Tell the community about your struggles, achievement, or anything related to your speaking progress."
-            android:textSize="11sp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/iv_flower_community"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_community_top" />
 
         <ImageView
             android:id="@+id/iv_flower_community"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:src="@drawable/flower"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -262,7 +268,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@id/recent_community_time"
+            android:id="@+id/recent_community_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Just now"
@@ -278,7 +284,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/chat_bubble"
-            android:padding="10dp"
+            android:padding="15dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, enim sed interdum faucibus, ante nisi semper ipsum, ac sollicitudin nibh mauris sit amet purus. Suspendisse pretium nunc at diam porta, sit amet porttitor arcu finibus. Sed ultrices nibh quis turpis laoreet fringilla."
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -306,8 +312,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_favorite_outline_24"
-                android:tint="@color/white" />
+                android:src="@drawable/ic_favorite_outline_24" />
 
             <TextView
                 android:id="@+id/tv_like_count"
@@ -339,8 +344,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_reply_24"
-                android:tint="@color/white" />
+                android:src="@drawable/ic_reply_24" />
 
             <TextView
                 android:id="@+id/tv_reply_count"
