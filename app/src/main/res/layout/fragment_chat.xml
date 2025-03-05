@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="Chat"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -308,6 +308,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_marginEnd="10dp"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_reply"
                 app:layout_constraintEnd_toStartOf="@+id/btn_reply"
                 app:layout_constraintTop_toTopOf="@+id/btn_reply">
@@ -337,6 +338,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
+                android:padding="10dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="10dp"
