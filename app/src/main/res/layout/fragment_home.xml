@@ -9,9 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="20dp"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
+        android:padding="30dp"
         android:background="@drawable/gradient">
 
         <TextView
@@ -30,6 +28,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/sample"
+            android:elevation="10dp"
             app:shapeAppearanceOverlay="@style/image_rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/sheet"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="220dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
