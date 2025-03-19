@@ -15,7 +15,7 @@
         android:paddingTop="30dp"
         android:paddingBottom="120dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_chat_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_chat_title"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_private_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_private_chat"
             tools:layout_editor_absoluteX="30dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_private_chat_top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_private_chat_bottom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/image_rounded" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recent_chat_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_chat"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recent_chat_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_chat"
                 app:layout_constraintTop_toBottomOf="@+id/recent_chat_name" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="11:59"
@@ -173,7 +173,7 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_recent_chat"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_community"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
             android:paddingEnd="25dp"
             app:layout_constraintTop_toBottomOf="@+id/layout_community">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_community_top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,7 +220,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_community_bottom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -261,7 +261,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/image_rounded" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recent_community_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -273,7 +273,7 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_community"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recent_community_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -285,7 +285,7 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_community"
                 app:layout_constraintTop_toBottomOf="@+id/recent_community_name" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recent_community_chat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -299,70 +299,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_recent_community" />
 
-            <LinearLayout
-                android:id="@+id/btn_like"
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_button"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
+                app:icon="@drawable/ic_favorite_outline_24"
+                android:text="26 Like"
+                android:backgroundTint="@color/primary"
+                app:cornerRadius="10dp"
                 android:layout_marginEnd="10dp"
-                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_reply"
                 app:layout_constraintEnd_toStartOf="@+id/btn_reply"
-                app:layout_constraintTop_toTopOf="@+id/btn_reply">
+                app:layout_constraintTop_toTopOf="@+id/btn_reply"/>
 
-                <ImageView
-                    android:id="@+id/img_like"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_favorite_outline_24" />
-
-                <TextView
-                    android:id="@+id/tv_like_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="26 Like"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_button"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:padding="10dp"
-                android:orientation="horizontal"
+                app:icon="@drawable/ic_reply_24"
+                android:text="3 Reply"
+                android:backgroundTint="@color/primary"
+                app:cornerRadius="10dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recent_community_chat">
-
-                <ImageView
-                    android:id="@+id/img_reply"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_reply_24" />
-
-                <TextView
-                    android:id="@+id/tv_reply_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3 Reply"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/recent_community_chat"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
