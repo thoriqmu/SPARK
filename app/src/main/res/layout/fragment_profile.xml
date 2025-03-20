@@ -12,6 +12,7 @@
         android:id="@+id/tv_profile_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Profile"
         android:textColor="@color/white"
         android:textSize="34sp"

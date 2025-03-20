@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:background="@color/transparent">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_recent_community"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/sample"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/image_rounded" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/recent_community_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="Name"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_recent_community"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/recent_community_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:text="Just now"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_recent_community"
+        app:layout_constraintTop_toBottomOf="@+id/recent_community_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/recent_community_chat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/chat_bubble"
+        android:padding="15dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, enim sed interdum faucibus, ante nisi semper ipsum, ac sollicitudin nibh mauris sit amet purus. Suspendisse pretium nunc at diam porta, sit amet porttitor arcu finibus. Sed ultrices nibh quis turpis laoreet fringilla."
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_recent_community" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/primary"
+        android:text="26 Like"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_favorite_outline_24"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_reply"
+        app:layout_constraintEnd_toStartOf="@+id/btn_reply"
+        app:layout_constraintTop_toTopOf="@+id/btn_reply" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/primary"
+        android:text="3 Reply"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_reply_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recent_community_chat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

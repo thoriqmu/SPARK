@@ -5,6 +5,7 @@
     <color name="primary">#122B46</color>
     <color name="secondary">#2C6AAC</color>
     <color name="tertiary">#58A832</color>
+    <color name="mid_color">#225286</color>
     <color name="edit_text">#DEEAF6</color>
     <color name="transparent">#00000000</color>
 </resources>
