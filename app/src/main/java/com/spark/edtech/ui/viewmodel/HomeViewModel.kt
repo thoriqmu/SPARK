@@ -1,7 +1,7 @@
-package com.spark.edtech.view
+package com.spark.edtech.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class ProfileViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

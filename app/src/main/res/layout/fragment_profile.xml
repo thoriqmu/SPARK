@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:padding="30dp"
-    tools:context=".view.ProfileFragment">
+    tools:context=".ui.view.profile.ProfileFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_profile_title"

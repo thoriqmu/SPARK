@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.HomeFragment">
+    tools:context=".ui.view.home.HomeFragment">
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -82,6 +82,8 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_track" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

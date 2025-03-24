@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:padding="30dp"
+    tools:context=".ui.view.profile.ProfileSettingActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/transparent"
+        android:padding="0dp"
+        app:icon="@drawable/ic_arrow_back_24"
+        app:iconSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_profile_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_profile_setting" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Profile Setting"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/btn_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Profile Picture"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/iv_profile_picture"
+        app:layout_constraintStart_toStartOf="@+id/iv_profile_picture"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_setting" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_profile_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sample"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/button_change_picture"
+        app:layout_constraintStart_toStartOf="@+id/button_change_picture"
+        app:layout_constraintTop_toBottomOf="@+id/tv_picture"
+        app:shapeAppearanceOverlay="@style/image_rounded" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_change_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="Change Profile\nPicture"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_profile_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Put up a nice profile picture! Everyone will be able to see it."
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_profile_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_profile_picture"
+        app:layout_constraintTop_toTopOf="@+id/iv_profile_picture" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_edit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Name"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_change_picture" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edit_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_edit_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Email"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_edit_name" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_edit_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edit_email" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_edit_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Bio"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_edit_email" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_edit_bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:maxLines="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_edit_bio" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:text="Save"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_edit_bio" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

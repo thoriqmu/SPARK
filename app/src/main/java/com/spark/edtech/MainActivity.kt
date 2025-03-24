@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.spark.edtech.databinding.ActivityMainBinding
-import com.spark.edtech.view.ChatFragment
-import com.spark.edtech.view.HomeFragment
-import com.spark.edtech.view.NotificationFragment
-import com.spark.edtech.view.ProfileFragment
+import com.spark.edtech.ui.view.chat.ChatFragment
+import com.spark.edtech.ui.view.home.HomeFragment
+import com.spark.edtech.ui.view.notification.NotificationFragment
+import com.spark.edtech.ui.view.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 

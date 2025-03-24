@@ -1,4 +1,4 @@
-package com.spark.edtech.view.auth
+package com.spark.edtech.ui.view.auth
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
