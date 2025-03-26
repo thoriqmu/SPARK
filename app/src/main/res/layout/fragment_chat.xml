@@ -305,7 +305,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_favorite_outline_24"
+                app:icon="@drawable/ic_favorite_outline"
                 android:text="26 Like"
                 android:backgroundTint="@color/primary"
                 app:cornerRadius="10dp"
@@ -318,7 +318,7 @@
                 android:id="@+id/btn_reply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_reply_24"
+                app:icon="@drawable/ic_reply"
                 android:text="3 Reply"
                 android:backgroundTint="@color/primary"
                 app:cornerRadius="10dp"

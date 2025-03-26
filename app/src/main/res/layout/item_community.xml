@@ -61,7 +61,7 @@
         android:backgroundTint="@color/primary"
         android:text="26 Like"
         app:cornerRadius="10dp"
-        app:icon="@drawable/ic_favorite_outline_24"
+        app:icon="@drawable/ic_favorite_outline"
         app:layout_constraintBottom_toBottomOf="@+id/btn_reply"
         app:layout_constraintEnd_toStartOf="@+id/btn_reply"
         app:layout_constraintTop_toTopOf="@+id/btn_reply" />
@@ -75,7 +75,7 @@
         android:backgroundTint="@color/primary"
         android:text="3 Reply"
         app:cornerRadius="10dp"
-        app:icon="@drawable/ic_reply_24"
+        app:icon="@drawable/ic_reply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recent_community_chat" />
