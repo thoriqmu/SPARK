@@ -56,4 +56,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.circleprogress)
+    implementation(libs.lottie)
 }

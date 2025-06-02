@@ -92,28 +92,17 @@
         android:textColor="@color/primary"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginTop="18dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="4dp"
-        android:text="Sign in"
-        android:backgroundTint="@color/primary" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Don't have an account?"
-        android:layout_marginTop="12dp"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="@color/primary" />
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/primary"
+        android:text="Sign in" />
 
 </LinearLayout>

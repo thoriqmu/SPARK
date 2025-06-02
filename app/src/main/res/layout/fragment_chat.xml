@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
+    android:rotationY="72"
     tools:context=".ui.view.chat.ChatFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="30dp"
-        android:paddingEnd="30dp"
         android:paddingTop="30dp"
+        android:paddingEnd="30dp"
         android:paddingBottom="120dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_chat_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chat"
             android:fontFamily="@font/montserrat_bold"
+            android:text="Chat"
             android:textColor="@color/white"
             android:textSize="34sp"
             android:textStyle="bold"
@@ -31,10 +32,10 @@
             android:id="@+id/layout_private_chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_chat_title"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chat_title">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_private_chat"
@@ -68,11 +69,11 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/chat_shape"
             android:elevation="10dp"
+            android:orientation="horizontal"
             android:paddingStart="25dp"
             android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:paddingEnd="25dp"
-            android:orientation="horizontal"
+            android:paddingBottom="15dp"
             app:layout_constraintTop_toBottomOf="@+id/layout_private_chat"
             tools:layout_editor_absoluteX="30dp">
 
@@ -81,9 +82,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Just between us!"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,8 +95,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:text="Share your thoughts, questions, or seek personal feedback on your speaking progress in a private space."
-                android:textSize="14sp"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/iv_flower_chat"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_private_chat_top" />
@@ -133,11 +134,11 @@
                 android:id="@+id/recent_chat_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:text="Name"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="15dp"
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_chat"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,12 +146,12 @@
                 android:id="@+id/recent_chat_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:maxLines="2"
                 android:text="Let's study together in the English room"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:maxLines="2"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_chat"
                 app:layout_constraintTop_toBottomOf="@+id/recent_chat_name" />
 
@@ -159,8 +160,8 @@
                 android:layout_height="wrap_content"
                 android:text="11:59"
                 android:textAlignment="textEnd"
-                android:textSize="12sp"
                 android:textColor="@color/white"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -170,10 +171,10 @@
             android:id="@+id/layout_community"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@+id/layout_recent_chat"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_recent_chat">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_community"
@@ -208,8 +209,8 @@
             android:elevation="10dp"
             android:paddingStart="25dp"
             android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:paddingEnd="25dp"
+            android:paddingBottom="15dp"
             app:layout_constraintTop_toBottomOf="@+id/layout_community">
 
             <com.google.android.material.textview.MaterialTextView
@@ -217,9 +218,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Share yours!"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -268,11 +269,11 @@
                 android:id="@+id/recent_community_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:text="Name"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="15dp"
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_community"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -280,11 +281,11 @@
                 android:id="@+id/recent_community_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
                 android:text="Just now"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_community"
                 app:layout_constraintTop_toBottomOf="@+id/recent_community_name" />
 
@@ -292,12 +293,12 @@
                 android:id="@+id/recent_community_chat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/chat_bubble"
                 android:padding="15dp"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, enim sed interdum faucibus, ante nisi semper ipsum, ac sollicitudin nibh mauris sit amet purus. Suspendisse pretium nunc at diam porta, sit amet porttitor arcu finibus. Sed ultrices nibh quis turpis laoreet fringilla."
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_recent_community" />
@@ -305,28 +306,28 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_favorite_outline"
-                android:text="26 Like"
-                android:backgroundTint="@color/primary"
-                app:cornerRadius="10dp"
                 android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/primary"
+                android:text="26 Like"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/ic_favorite_outline"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_reply"
                 app:layout_constraintEnd_toStartOf="@+id/btn_reply"
-                app:layout_constraintTop_toTopOf="@+id/btn_reply"/>
+                app:layout_constraintTop_toTopOf="@+id/btn_reply" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_reply"
-                android:text="3 Reply"
-                android:backgroundTint="@color/primary"
-                app:cornerRadius="10dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/primary"
+                android:text="3 Reply"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/ic_reply"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recent_community_chat"/>
+                app:layout_constraintTop_toBottomOf="@+id/recent_community_chat" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
