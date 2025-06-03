@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    android:rotationY="72"
     tools:context=".ui.view.chat.ChatFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +53,7 @@
                 android:id="@+id/btn_arrow_forward_private"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_forward"
+                android:src="@drawable/ic_forward"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -193,7 +192,7 @@
                 android:id="@+id/btn_arrow_forward_community"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_forward"
+                android:src="@drawable/ic_forward"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

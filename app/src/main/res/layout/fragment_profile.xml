@@ -97,22 +97,13 @@
     <LinearLayout
         android:id="@+id/layout_notification"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_detail_profile">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_notification" />
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="wrap_content" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
@@ -130,76 +121,41 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_setting"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_profile_setting"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="15dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/transparent"
+        android:padding="0dp"
+        android:text="Profile Setting"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_forward"
+        app:iconGravity="end"
+        app:iconSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_notification">
+        app:layout_constraintTop_toBottomOf="@+id/layout_notification" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_settings" />
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Profile Setting"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_arrow_forward"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_logout"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="15dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/transparent"
+        android:text="Logout"
+        android:padding="0dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textAlignment="textStart"
+        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_forward"
+        app:iconGravity="end"
+        app:iconSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_setting">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_logout" />
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_arrow_forward"/>
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/btn_profile_setting">
+    </com.google.android.material.button.MaterialButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

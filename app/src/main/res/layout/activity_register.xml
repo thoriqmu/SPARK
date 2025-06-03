@@ -100,7 +100,7 @@
             android:id="@+id/password_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="@color/primary"
             android:backgroundTint="@color/edit_text"
             android:hint="Password"/>
@@ -126,7 +126,7 @@
             android:id="@+id/confirm_password_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="@color/primary"
             android:backgroundTint="@color/edit_text"
             android:hint="Confirm Password"/>

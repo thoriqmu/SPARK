@@ -74,20 +74,21 @@
             android:id="@+id/password_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="@color/primary"
             android:backgroundTint="@color/edit_text"
-            android:hint="Password"/>
+            android:hint="Password" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/forgot_password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forgot your password?"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:layout_gravity="end"
         android:textAlignment="textEnd"
         android:textColor="@color/primary"
         android:layout_marginStart="40dp"
@@ -104,5 +105,15 @@
         app:cornerRadius="10dp"
         android:backgroundTint="@color/primary"
         android:text="Sign in" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/redeem_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don’t have an account? Redeem code here!"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"/>
 
 </LinearLayout>
