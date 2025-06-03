@@ -12,10 +12,6 @@
         android:icon="@drawable/ic_chat" />
 
     <item
-        android:enabled="false"
-        android:title="" />
-
-    <item
         android:id="@+id/notificationFragment"
         android:title="Notification"
         android:icon="@drawable/ic_notification" />

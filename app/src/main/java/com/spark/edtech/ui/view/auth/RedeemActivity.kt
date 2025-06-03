@@ -29,6 +29,11 @@ class RedeemActivity : AppCompatActivity() {
             viewModel.validateRedeemCode(code)
         }
 
+        binding.loginPage.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         viewModel.redeemResult.observe(this) { result ->
             result.onSuccess { redeemCode ->
                 Toast.makeText(this, "Code valid! Proceed to register.", Toast.LENGTH_SHORT).show()

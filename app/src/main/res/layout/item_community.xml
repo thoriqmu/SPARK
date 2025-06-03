@@ -61,7 +61,7 @@
         android:backgroundTint="@color/primary"
         android:text="26 Like"
         app:cornerRadius="10dp"
-        app:icon="@drawable/ic_favorite_outline"
+        app:icon="@drawable/ic_like"
         app:layout_constraintBottom_toBottomOf="@+id/btn_reply"
         app:layout_constraintEnd_toStartOf="@+id/btn_reply"
         app:layout_constraintTop_toTopOf="@+id/btn_reply" />

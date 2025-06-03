@@ -20,7 +20,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -51,18 +51,6 @@
                 app:menu="@menu/bottom_nav_menu" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/primary"
-            android:contentDescription="Camera"
-            android:scaleType="center"
-            android:clickable="true"
-            android:src="@drawable/ic_camera"
-            app:shapeAppearanceOverlay="@style/fab_3_rounded"
-            app:layout_anchor="@id/bottomAppBar"
-            app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -2,6 +2,7 @@ package com.spark.edtech.data.source
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import com.spark.edtech.data.model.RedeemCode
 import com.spark.edtech.data.model.User
@@ -21,8 +22,14 @@ class FirebaseDataSource @Inject constructor(
         return try {
             val snapshot = redeemCodesRef.child(code).get().await()
             Log.d(TAG, "Raw snapshot for redeem code $code: ${snapshot.value}")
-            val redeemCode = snapshot.getValue(RedeemCode::class.java)?.copy(code = code)
-            Log.d(TAG, "Redeem code $code: $redeemCode")
+            if (!snapshot.exists()) {
+                Log.e(TAG, "Redeem code $code does not exist")
+                return null
+            }
+            val isUsed = snapshot.child("isUsed").getValue(Boolean::class.java) ?: false
+            val createdAt = snapshot.child("createdAt").getValue(String::class.java) ?: ""
+            val redeemCode = RedeemCode(code = code, isUsed = isUsed, createdAt = createdAt)
+            Log.d(TAG, "Deserialized redeem code $code: $redeemCode")
             redeemCode
         } catch (e: Exception) {
             Log.e(TAG, "Error validating redeem code $code: ${e.message}")
@@ -39,22 +46,57 @@ class FirebaseDataSource @Inject constructor(
         }
     }
 
-    suspend fun saveUser(user: User) {
-        usersRef.child(user.uid).setValue(user).await()
+    suspend fun registerUser(user: User) {
+        try {
+            usersRef.child(user.uid).setValue(user).await()
+            Log.d(TAG, "Registered user ${user.uid}")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error registering user: ${e.message}")
+            throw e
+        }
     }
 
     suspend fun createUserWithEmail(email: String, password: String): String? {
-        val result = auth.createUserWithEmailAndPassword(email, password).await()
-        return result.user?.uid
+        try {
+            val result = auth.createUserWithEmailAndPassword(email, password).await()
+            Log.d(TAG, "Created user with email $email, uid: ${result.user?.uid}")
+            return result.user?.uid
+        } catch (e: Exception) {
+            Log.e(TAG, "Error creating user with email $email: ${e.message}")
+            throw e
+        }
     }
 
-    suspend fun signInWithEmail(email: String, password: String): String? {
-        val result = auth.signInWithEmailAndPassword(email, password).await()
-        return result.user?.uid
+    suspend fun loginUser(email: String, password: String): String? {
+        try {
+            val result = auth.signInWithEmailAndPassword(email, password).await()
+            Log.d(TAG, "Logged in user with email $email, uid: ${result.user?.uid}")
+            return result.user?.uid
+        } catch (e: Exception) {
+            Log.e(TAG, "Error logging in user with email $email: ${e.message}")
+            throw e
+        }
     }
 
-    suspend fun getUserById(id: String): User? {
-        val snapshot = usersRef.child(id).get().await()
-        return snapshot.getValue(User::class.java)
+    suspend fun getUser(uid: String): User? {
+        try {
+            val snapshot = usersRef.child(uid).get().await()
+            val user = snapshot.getValue(User::class.java)
+            Log.d(TAG, "Fetched user $uid: $user")
+            return user
+        } catch (exception: Exception) {
+            Log.e(TAG, "Error fetching user $uid: ${exception.message}")
+            return null
+        }
+    }
+
+    suspend fun updateUser(user: User) {
+        try {
+            usersRef.child(user.uid).setValue(user).await()
+            Log.d(TAG, "Updated user ${user.uid}")
+        } catch (exception: Exception) {
+            Log.e(TAG, "Error updating user ${user.uid}: ${exception.message}")
+            throw exception
+        }
     }
 }

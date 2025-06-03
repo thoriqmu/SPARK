@@ -38,17 +38,21 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun markRedeemCodeAsUsed(code: String): Result<Unit> {
         return try {
             dataSource.markRedeemCodeAsUsed(code)
+            Log.d(TAG, "Successfully marked redeem code $code as used")
             Result.success(Unit)
         } catch (e: Exception) {
+            Log.e(TAG, "Error marking redeem code $code as used: ${e.message}")
             Result.failure(e)
         }
     }
 
     override suspend fun registerUser(user: User): Result<Unit> {
         return try {
-            dataSource.saveUser(user)
+            dataSource.registerUser(user)
+            Log.d(TAG, "Successfully registered user ${user.uid}")
             Result.success(Unit)
         } catch (e: Exception) {
+            Log.e(TAG, "Error registering user ${user.uid}: ${e.message}")
             Result.failure(e)
         }
     }
@@ -57,37 +61,57 @@ class AuthRepositoryImpl @Inject constructor(
         return try {
             val uid = dataSource.createUserWithEmail(email, password)
             if (uid != null) {
+                Log.d(TAG, "Successfully created user with email $email, uid: $uid")
                 Result.success(uid)
             } else {
+                Log.e(TAG, "Failed to create user with email $email: UID is null")
                 Result.failure(Exception("Failed to create user"))
             }
         } catch (e: Exception) {
+            Log.e(TAG, "Error creating user with email $email: ${e.message}")
             Result.failure(e)
         }
     }
 
     override suspend fun loginUser(email: String, password: String): Result<String> {
         return try {
-            val uid = dataSource.signInWithEmail(email, password)
+            val uid = dataSource.loginUser(email, password)
             if (uid != null) {
+                Log.d(TAG, "Successfully logged in user with email $email, uid: $uid")
                 Result.success(uid)
             } else {
+                Log.e(TAG, "Failed to login user with email $email: UID is null")
                 Result.failure(Exception("Login failed"))
             }
         } catch (e: Exception) {
+            Log.e(TAG, "Error logging in user with email $email: ${e.message}")
             Result.failure(e)
         }
     }
 
     override suspend fun getUser(uid: String): Result<User> {
         return try {
-            val user = dataSource.getUserById(uid)
+            val user = dataSource.getUser(uid)
             if (user != null) {
+                Log.d(TAG, "Successfully fetched user $uid")
                 Result.success(user)
             } else {
+                Log.e(TAG, "User $uid not found")
                 Result.failure(Exception("User not found"))
             }
         } catch (e: Exception) {
+            Log.e(TAG, "Error fetching user $uid: ${e.message}")
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun updateUser(user: User): Result<Unit> {
+        return try {
+            dataSource.updateUser(user)
+            Log.d(TAG, "Successfully updated user ${user.uid}")
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error updating user ${user.uid}: ${e.message}")
             Result.failure(e)
         }
     }

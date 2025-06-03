@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_confidence">
@@ -147,7 +147,8 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/ic_up" />
+                                    app:srcCompat="@drawable/ic_up"
+                                    app:tint="@color/primary" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -165,7 +166,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/card_book"
+                        android:id="@+id/card_friend"
                         android:layout_width="100dp"
                         android:layout_height="140dp"
                         android:clickable="true"
@@ -193,14 +194,15 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/ic_book" />
+                                    app:srcCompat="@drawable/ic_friend"
+                                    app:tint="@color/primary"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Get Your\nBook"
+                                android:text="Study With\nFriend"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
@@ -239,7 +241,8 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/ic_megaphone" />
+                                    app:srcCompat="@drawable/ic_community"
+                                    app:tint="@color/primary"/>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
