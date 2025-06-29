@@ -1,6 +1,7 @@
 package com.spark.edtech.ui.view.profile
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,37 @@ class ProfileSettingActivity : AppCompatActivity() {
 
         // Load user data
         viewModel.loadUserProfile()
+
+        // Observe loading state
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.lottieLoading.visibility = View.VISIBLE
+                binding.btnBack.visibility = View.VISIBLE
+                binding.tvProfileSetting.visibility = View.VISIBLE
+                binding.tvPicture.visibility = View.GONE
+                binding.ivProfilePicture.visibility = View.GONE
+                binding.btnChangePicture.visibility = View.GONE
+                binding.tvProfileDescription.visibility = View.GONE
+                binding.tvEditName.visibility = View.GONE
+                binding.inputEditName.visibility = View.GONE
+                binding.tvEditBio.visibility = View.GONE
+                binding.inputEditBio.visibility = View.GONE
+                binding.btnSave.visibility = View.GONE
+            } else {
+                binding.lottieLoading.visibility = View.GONE
+                binding.btnBack.visibility = View.VISIBLE
+                binding.tvProfileSetting.visibility = View.VISIBLE
+                binding.tvPicture.visibility = View.VISIBLE
+                binding.ivProfilePicture.visibility = View.VISIBLE
+                binding.btnChangePicture.visibility = View.VISIBLE
+                binding.tvProfileDescription.visibility = View.VISIBLE
+                binding.tvEditName.visibility = View.VISIBLE
+                binding.inputEditName.visibility = View.VISIBLE
+                binding.tvEditBio.visibility = View.VISIBLE
+                binding.inputEditBio.visibility = View.VISIBLE
+                binding.btnSave.visibility = View.VISIBLE
+            }
+        }
 
         // Observe user data
         viewModel.userProfile.observe(this) { result ->

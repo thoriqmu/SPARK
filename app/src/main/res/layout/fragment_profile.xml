@@ -8,6 +8,19 @@
     android:padding="30dp"
     tools:context=".ui.view.profile.ProfileFragment">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_loading"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_title"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_profile_title"
         android:layout_width="wrap_content"
@@ -17,6 +30,7 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,6 +41,7 @@
         android:layout_marginTop="40dp"
         android:src="@drawable/sample"
         android:elevation="10dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_profile_title"
@@ -42,6 +57,7 @@
         app:cornerRadius="10dp"
         android:elevation="10dp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile"/>
@@ -53,6 +69,7 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         android:layout_marginTop="40dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_change_picture">
@@ -106,6 +123,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="40dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_detail_profile">
@@ -140,6 +158,7 @@
         app:icon="@drawable/ic_forward"
         app:iconGravity="end"
         app:iconSize="20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_notification" />
@@ -158,6 +177,7 @@
         app:icon="@drawable/ic_forward"
         app:iconGravity="end"
         app:iconSize="20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_profile_setting">

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.spark.edtech.data.model.User
 import com.spark.edtech.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -13,24 +12,32 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class PracticeViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val firebaseAuth: FirebaseAuth
 ) : ViewModel() {
 
-    private val _userProfile = MutableLiveData<Result<User>>()
-    val userProfile: LiveData<Result<User>> get() = _userProfile
+    private val _anxietyLevel = MutableLiveData<Result<String>>()
+    val anxietyLevel: LiveData<Result<String>> get() = _anxietyLevel
 
-    private val _isLoading = MutableLiveData<Boolean>(true) // Ditambahkan: inisialisasi ke true
+    private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-    fun loadUserProfile() {
+    fun loadAnxietyLevel() {
+        _isLoading.postValue(true)
+        val startTime = System.currentTimeMillis()
         viewModelScope.launch {
-            val startTime = System.currentTimeMillis()
             val currentUser = firebaseAuth.currentUser
             if (currentUser != null) {
-                val result = authRepository.getUser(currentUser.uid)
-                _userProfile.postValue(result)
+                // TODO: Replace with actual logic to fetch anxiety level from Firebase
+                // Example: Assume anxiety level is stored in user data or a separate collection
+                val result = try {
+                    // Mock implementation; replace with actual Firebase call
+                    Result.success("None")
+                } catch (e: Exception) {
+                    Result.failure(e)
+                }
+                _anxietyLevel.postValue(result)
                 val elapsedTime = System.currentTimeMillis() - startTime
                 val remainingTime = 2000L - elapsedTime // Minimal 2 detik
                 if (remainingTime > 0) {
@@ -38,7 +45,7 @@ class HomeViewModel @Inject constructor(
                 }
                 _isLoading.postValue(false)
             } else {
-                _userProfile.postValue(Result.failure(Exception("No user logged in")))
+                _anxietyLevel.postValue(Result.failure(Exception("No user logged in")))
                 val elapsedTime = System.currentTimeMillis() - startTime
                 val remainingTime = 2000L - elapsedTime
                 if (remainingTime > 0) {
