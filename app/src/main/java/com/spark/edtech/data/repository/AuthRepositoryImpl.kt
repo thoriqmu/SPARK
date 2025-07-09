@@ -4,6 +4,7 @@ import android.util.Log
 import com.spark.edtech.data.model.RedeemCode
 import com.spark.edtech.data.model.User
 import com.spark.edtech.data.source.FirebaseDataSource
+import java.io.File
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -112,6 +113,18 @@ class AuthRepositoryImpl @Inject constructor(
             Result.success(Unit)
         } catch (e: Exception) {
             Log.e(TAG, "Error updating user ${user.uid}: ${e.message}")
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun uploadProfilePicture(uid: String, imageFile: File): Result<String> {
+        return try {
+            val imageName = "profile_$uid.jpg"
+            val downloadUrl = dataSource.uploadProfilePicture(imageFile, imageName)
+            Log.d(TAG, "Successfully uploaded profile picture for $uid: $downloadUrl")
+            Result.success(imageName)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error uploading profile picture for $uid: ${e.message}")
             Result.failure(e)
         }
     }

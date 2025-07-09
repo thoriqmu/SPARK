@@ -2,18 +2,30 @@ package com.spark.edtech.ui.view.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.storage.FirebaseStorage
+import com.spark.edtech.R
 import com.spark.edtech.databinding.FragmentProfileBinding
 import com.spark.edtech.ui.view.auth.LoginActivity
 import com.spark.edtech.ui.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import java.io.File
+import java.io.FileOutputStream
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -25,10 +37,32 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ProfileViewModel by viewModels()
+    private val storageRef = FirebaseStorage.getInstance().getReference("picture")
+
+    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == android.app.Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                try {
+                    val inputStream = requireContext().contentResolver.openInputStream(uri)
+                    val tempFile = File.createTempFile("profile", ".jpg", requireContext().cacheDir)
+                    inputStream?.use { input ->
+                        FileOutputStream(tempFile).use { output ->
+                            input.copyTo(output)
+                        }
+                    }
+                    // Ditambahkan: panggil uploadProfilePicture di dalam coroutine
+                    CoroutineScope(Dispatchers.Main).launch {
+                        viewModel.uploadProfilePicture(tempFile)
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Error selecting image: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Ditambahkan: set animasi transisi fade
         enterTransition = Fade().setDuration(300)
         exitTransition = Fade().setDuration(300)
     }
@@ -38,9 +72,8 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        // Ditambahkan: set visibilitas awal secara eksplisit
         binding.lottieLoading.visibility = View.VISIBLE
-        binding.tvProfileTitle.visibility = View.VISIBLE // Tetap visible sesuai XML
+        binding.tvProfileTitle.visibility = View.VISIBLE
         binding.ivProfile.visibility = View.GONE
         binding.btnChangePicture.visibility = View.GONE
         binding.layoutDetailProfile.visibility = View.GONE
@@ -57,7 +90,6 @@ class ProfileFragment : Fragment() {
         binding.lottieLoading.setFailureListener { throwable ->
             Toast.makeText(requireContext(), "Failed to load animation: ${throwable.message}", Toast.LENGTH_SHORT).show()
             binding.lottieLoading.visibility = View.GONE
-            // Show UI even if animation fails
             TransitionManager.beginDelayedTransition(binding.root as ViewGroup, Fade().setDuration(300))
             binding.tvProfileTitle.visibility = View.VISIBLE
             binding.ivProfile.visibility = View.VISIBLE
@@ -80,7 +112,6 @@ class ProfileFragment : Fragment() {
                 binding.btnProfileSetting.visibility = View.GONE
                 binding.btnLogout.visibility = View.GONE
             } else {
-                // Ditambahkan: gunakan transisi fade saat menampilkan UI
                 TransitionManager.beginDelayedTransition(binding.root as ViewGroup, Fade().setDuration(300))
                 binding.lottieLoading.visibility = View.GONE
                 binding.tvProfileTitle.visibility = View.VISIBLE
@@ -99,11 +130,67 @@ class ProfileFragment : Fragment() {
                 binding.tvUserName.text = user.name
                 binding.tvUserEmail.text = user.email
                 binding.tvUserBio.text = user.bio ?: "No bio available"
+                // Muat foto profil dengan URL unduhan
+                CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        val imageName = user.image ?: "default.jpg"
+                        val imageRef = storageRef.child(imageName)
+                        val downloadUrl = imageRef.downloadUrl.await()
+                        Glide.with(this@ProfileFragment)
+                            .load(downloadUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.drawable.sample)
+                            .into(binding.ivProfile)
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "Failed to load profile picture: ${e.message}", Toast.LENGTH_SHORT).show()
+                        // Muat default.jpg jika gagal
+                        try {
+                            val defaultUrl = storageRef.child("default.jpg").downloadUrl.await()
+                            Glide.with(this@ProfileFragment)
+                                .load(defaultUrl)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.drawable.sample)
+                                .into(binding.ivProfile)
+                        } catch (e: Exception) {
+                            Glide.with(this@ProfileFragment)
+                                .load(R.drawable.sample)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(binding.ivProfile)
+                        }
+                    }
+                }
             }.onFailure { exception ->
                 Toast.makeText(requireContext(), "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
                 binding.tvUserName.text = "User Name"
                 binding.tvUserEmail.text = "email@gmail.com"
                 binding.tvUserBio.text = "No bio available"
+                // Muat gambar default saat error
+                CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        val defaultUrl = storageRef.child("default.jpg").downloadUrl.await()
+                        Glide.with(this@ProfileFragment)
+                            .load(defaultUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.drawable.sample)
+                            .into(binding.ivProfile)
+                    } catch (e: Exception) {
+                        Glide.with(this@ProfileFragment)
+                            .load(R.drawable.sample)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(binding.ivProfile)
+                    }
+                }
+            }
+        }
+
+        // Observe upload picture result
+        viewModel.uploadPictureResult.observe(viewLifecycleOwner) { result ->
+            result.onSuccess {
+                Toast.makeText(requireContext(), "Profile picture updated", Toast.LENGTH_SHORT).show()
+                // Ditambahkan: muat ulang profil untuk memperbarui gambar
+                viewModel.loadUserProfile()
+            }.onFailure { exception ->
+                Toast.makeText(requireContext(), "Failed to update picture: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -130,15 +217,17 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(requireContext(), ProfileSettingActivity::class.java))
         }
 
-        // Placeholder for other buttons
+        // Handle change picture button
         binding.btnChangePicture.setOnClickListener {
-            Toast.makeText(requireContext(), "Change profile picture not implemented", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            pickImageLauncher.launch(intent)
         }
+
+        // Placeholder for notification switch
         binding.switchNotification.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(requireContext(), "Notification setting: $isChecked", Toast.LENGTH_SHORT).show()
         }
 
-        // Ditambahkan: panggil loadUserProfile di akhir
         viewModel.loadUserProfile()
     }
 

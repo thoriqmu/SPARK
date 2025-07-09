@@ -44,6 +44,7 @@
             android:src="@drawable/sample"
             android:elevation="10dp"
             android:visibility="gone"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/image_rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

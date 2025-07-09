@@ -39,6 +39,8 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="40dp"
+        android:contentDescription="Profile Picture"
+        android:scaleType="centerCrop"
         android:src="@drawable/sample"
         android:elevation="10dp"
         android:visibility="gone"

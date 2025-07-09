@@ -39,6 +39,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
     }
 }
 
@@ -63,6 +64,20 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.database.ktx)
 
+    //Tensorflow Lite
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+    implementation(libs.tensorflow.lite.gpu)
+
+    //ML Kit Face Detection
+    implementation(libs.face.detection)
+
+    //CameraX
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+
     //Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -80,4 +95,5 @@ dependencies {
     // Lain-lain
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.jackson.annotations)
+    implementation(libs.glide)
 }

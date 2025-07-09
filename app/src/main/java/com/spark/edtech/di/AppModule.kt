@@ -2,6 +2,7 @@ package com.spark.edtech.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.spark.edtech.data.repository.AuthRepository
 import com.spark.edtech.data.repository.AuthRepositoryImpl
 import com.spark.edtech.data.source.FirebaseDataSource
@@ -28,11 +29,18 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage { // Ditambahkan: Firebase Storage
+        return FirebaseStorage.getInstance()
+    }
+
+    @Provides
+    @Singleton
     fun provideFirebaseDataSource(
         auth: FirebaseAuth,
-        database: FirebaseDatabase
+        database: FirebaseDatabase,
+        storage: FirebaseStorage // Ditambahkan: Firebase Storage
     ): FirebaseDataSource {
-        return FirebaseDataSource(auth, database)
+        return FirebaseDataSource(auth, database, storage)
     }
 
     @Provides
