@@ -64,6 +64,18 @@ class PrivateMessageActivity : AppCompatActivity() {
         binding = ActivityPrivateMessageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val btnShowAttachment = binding.btnShowAttachments
+        val llAttachmentOptions = binding.llAttachmentOptions
+
+        btnShowAttachment.setOnClickListener {
+            // Toggle visibility panel lampiran
+            if (llAttachmentOptions.visibility == View.GONE) {
+                llAttachmentOptions.visibility = View.VISIBLE
+            } else {
+                llAttachmentOptions.visibility = View.GONE
+            }
+        }
+
         val chatId = intent.getStringExtra("CHAT_ID") ?: return
         val otherUserName = intent.getStringExtra("OTHER_USER_NAME") ?: "User"
         val otherUserId = intent.getStringExtra("OTHER_USER_ID") ?: ""

@@ -58,4 +58,33 @@ class ChatViewModel @Inject constructor(
             }
         }
     }
+
+    fun getLastMessage(chatId: String): LiveData<Message?> {
+        val lastMessage = MutableLiveData<Message?>()
+        viewModelScope.launch {
+            try {
+                val message = firebaseDataSource.getLastChatMessage(chatId)
+                lastMessage.value = message
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading last message: ${e.message}")
+                lastMessage.value = null
+            }
+
+            }
+        return lastMessage
+    }
+
+    fun getLastTimestamp(chatId: String): LiveData<Long?> {
+        val lastTimestamp = MutableLiveData<Long?>()
+        viewModelScope.launch {
+            try {
+                val timestamp = firebaseDataSource.getLastMessageTimestamp(chatId)
+                lastTimestamp.value = timestamp
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading last timestamp: ${e.message}")
+                lastTimestamp.value = null
+            }
+        }
+        return lastTimestamp
+    }
 }

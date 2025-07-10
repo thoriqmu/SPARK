@@ -166,10 +166,12 @@
                 android:text="Let's study together in the English room"
                 android:textColor="@color/white"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_recent_chat"
                 app:layout_constraintTop_toBottomOf="@+id/recent_chat_name" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/recent_chat_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="11:59"

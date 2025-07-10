@@ -43,6 +43,20 @@ class ChatAdapter(
                 "audio" -> "Audio"
                 else -> "No messages"
             }
+            binding.tvChatTime.text = lastMessage?.timestamp?.let {
+                val currentTime = System.currentTimeMillis()
+                val timeDifference = currentTime - it
+                val seconds = timeDifference / 1000
+                val minutes = seconds / 60
+                val hours = minutes / 60
+                val days = hours / 24
+                when {
+                    days > 0 -> "$days days ago"
+                    hours > 0 -> "$hours hours ago"
+                    minutes > 0 -> "$minutes minutes ago"
+                    else -> "$seconds seconds ago"
+                }
+            }.toString()
             val imageName = user.image ?: "default.jpg"
             CoroutineScope(Dispatchers.Main).launch {
                 try {

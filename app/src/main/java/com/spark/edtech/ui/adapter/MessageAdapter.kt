@@ -44,7 +44,6 @@ class MessageAdapter(
             binding.ivMessageImage.layoutParams = layoutParams
             binding.llAudioContainer.layoutParams = layoutParams
             binding.tvTimestamp.layoutParams = layoutParams
-            binding.btnReply.layoutParams = layoutParams
 
             if (message.type == "image") {
                 Glide.with(binding.root.context)
@@ -64,8 +63,6 @@ class MessageAdapter(
             } else {
                 binding.tvReplyContent.visibility = View.GONE
             }
-
-            binding.btnReply.setOnClickListener { onReplyClick(message.messageId) }
         }
 
         private fun getReplyContent(replyTo: String): String {

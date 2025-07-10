@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
@@ -89,52 +90,68 @@ class HomeFragment : Fragment() {
         // Observe user data
         viewModel.userProfile.observe(viewLifecycleOwner) { result ->
             result.onSuccess { user ->
-                val firstName = user.name.split(" ").firstOrNull() ?: "User"
-                binding.tvUserName.text = "Hello,\n$firstName!"
-                // Ditambahkan: muat foto profil dengan URL unduhan
-                CoroutineScope(Dispatchers.Main).launch {
+                binding.tvUserName.text = "Hello,\n${user.name.split(" ").firstOrNull() ?: "User"}!"
+
+                // Use viewLifecycleOwner.lifecycleScope for coroutines tied to the view's lifecycle
+                viewLifecycleOwner.lifecycleScope.launch {
                     try {
                         val imageName = user.image ?: "default.jpg"
                         val imageRef = storageRef.child(imageName)
                         val downloadUrl = imageRef.downloadUrl.await()
+
+                        // Ensure fragment is still added before using Glide
+                        if (!isAdded) return@launch
+
                         Glide.with(this@HomeFragment)
                             .load(downloadUrl)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.drawable.sample)
                             .into(binding.ivUserPhoto)
                     } catch (e: Exception) {
+                        if (!isAdded) return@launch // Check again in case of error before next Glide call
                         Toast.makeText(requireContext(), "Failed to load profile picture: ${e.message}", Toast.LENGTH_SHORT).show()
                         // Muat default.jpg jika gagal
                         try {
                             val defaultUrl = storageRef.child("default.jpg").downloadUrl.await()
+                            if (!isAdded) return@launch
+
                             Glide.with(this@HomeFragment)
                                 .load(defaultUrl)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .error(R.drawable.sample)
                                 .into(binding.ivUserPhoto)
-                        } catch (e: Exception) {
+                        } catch (innerE: Exception) {
+                            if (!isAdded) return@launch
+
                             Glide.with(this@HomeFragment)
-                                .load(R.drawable.sample)
+                                .load(R.drawable.sample) // Load placeholder directly
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(binding.ivUserPhoto)
                         }
                     }
                 }
             }.onFailure { exception ->
+                // Ensure fragment is still added before UI updates from LiveData observer
+                if (!isAdded) return@observe
+
                 Toast.makeText(requireContext(), "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
                 binding.tvUserName.text = "Hello,\nUser!"
-                // Ditambahkan: muat gambar default saat error
-                CoroutineScope(Dispatchers.Main).launch {
+
+                viewLifecycleOwner.lifecycleScope.launch {
                     try {
                         val defaultUrl = storageRef.child("default.jpg").downloadUrl.await()
+                        if (!isAdded) return@launch
+
                         Glide.with(this@HomeFragment)
                             .load(defaultUrl)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.drawable.sample)
                             .into(binding.ivUserPhoto)
                     } catch (e: Exception) {
+                        if (!isAdded) return@launch
+
                         Glide.with(this@HomeFragment)
-                            .load(R.drawable.sample)
+                            .load(R.drawable.sample) // Load placeholder directly
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(binding.ivUserPhoto)
                     }

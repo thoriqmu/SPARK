@@ -100,8 +100,36 @@ class ChatFragment : Fragment() {
         viewModel.recentChatUsers.observe(viewLifecycleOwner) { result ->
             result.onSuccess { usersWithChatIds ->
                 if (usersWithChatIds.isNotEmpty()) {
-                    val (user, _) = usersWithChatIds.first() // Take the first user for recent chat
+                    val (user, chatId) = usersWithChatIds.first() // Ambil user dan chatId
                     binding.recentChatName.text = user.name
+
+                    // AMBIL DAN TAMPILKAN PESAN TERAKHIR
+                    viewModel.getLastMessage(chatId).observe(viewLifecycleOwner) { lastMessage ->
+                        binding.recentChatText.text = when (lastMessage?.type) {
+                            "text" -> lastMessage.content
+                            "image" -> "Image"
+                            "audio" -> "Audio"
+                            else -> "No messages"
+                        }
+                    }
+
+                    viewModel.getLastTimestamp(chatId).observe(viewLifecycleOwner) { lastTimestamp ->
+                        binding.recentChatTime.text = lastTimestamp?.let {
+                            val currentTime = System.currentTimeMillis()
+                            val timeDifference = currentTime - it
+                            val seconds = timeDifference / 1000
+                            val minutes = seconds / 60
+                            val hours = minutes / 60
+                            val days = hours / 24
+                            when {
+                                days > 0 -> "$days days ago"
+                                hours > 0 -> "$hours hours ago"
+                                minutes > 0 -> "$minutes minutes ago"
+                                else -> "$seconds seconds ago"
+                            }
+                        }.toString()
+                    }
+
                     CoroutineScope(Dispatchers.Main).launch {
                         try {
                             val imageName = user.image ?: "default.jpg"
@@ -121,7 +149,7 @@ class ChatFragment : Fragment() {
                     }
                     binding.layoutRecentChat.setOnClickListener {
                         val intent = Intent(requireContext(), PrivateMessageActivity::class.java).apply {
-                            putExtra("CHAT_ID", usersWithChatIds.first().second)
+                            putExtra("CHAT_ID", chatId) // Gunakan chatId yang benar
                             putExtra("OTHER_USER_ID", user.uid)
                             putExtra("OTHER_USER_NAME", user.name)
                             putExtra("OTHER_USER_IMAGE", user.image)
@@ -130,6 +158,7 @@ class ChatFragment : Fragment() {
                     }
                 } else {
                     binding.recentChatName.text = "No Recent Chat"
+                    binding.recentChatText.text = "Start a new conversation"
                     Glide.with(this@ChatFragment)
                         .load(R.drawable.sample)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -137,6 +166,7 @@ class ChatFragment : Fragment() {
                 }
             }.onFailure { exception ->
                 binding.recentChatName.text = "User Name"
+                binding.recentChatText.text = "Failed to load chat"
                 Glide.with(this@ChatFragment)
                     .load(R.drawable.sample)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)

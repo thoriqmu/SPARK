@@ -196,6 +196,23 @@ class FirebaseDataSource @Inject constructor(
         }
     }
 
+    suspend fun getLastMessageTimestamp(chatId: String): Long? {
+        try {
+            val snapshot = privateChatsRef.child(chatId).child("messages")
+                .orderByChild("timestamp")
+                .limitToLast(1)
+                .get()
+                .await()
+            val timestamp =
+                snapshot.children.firstOrNull()?.child("timestamp")?.getValue(Long::class.java)
+            Log.d(TAG, "Fetched last message timestamp for chat $chatId: $timestamp")
+            return timestamp
+        } catch (e: Exception) {
+            Log.e(TAG, "Error fetching last message timestamp for chat $chatId: ${e.message}")
+            return null
+        }
+    }
+
     suspend fun getUserChats(userUid: String): List<String> {
         try {
             val snapshot = usersRef.child(userUid).child("chats").get().await()
