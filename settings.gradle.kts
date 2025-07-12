@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SPARK"
+rootProject.name = "BRAVY"
 include(":app")

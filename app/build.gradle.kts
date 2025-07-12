@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.spark.edtech"
+    namespace = "com.bravy.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.spark.edtech"
+        applicationId = "com.bravy.app"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
