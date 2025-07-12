@@ -1,3 +1,7 @@
+configurations.all {
+    exclude(group = "com.google.ai.edge.litert", module = "litert-api")
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -65,9 +69,11 @@ dependencies {
     implementation(libs.firebase.database.ktx)
 
     //Tensorflow Lite
-    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite)
+//    implementation(libs.tensorflow.lite.support)
     implementation(libs.tensorflow.lite.metadata)
-    implementation(libs.tensorflow.lite.gpu)
+//    implementation(libs.tensorflow.lite.gpu)
+    implementation(libs.tensorflow.lite.task.vision)
 
     //ML Kit Face Detection
     implementation(libs.face.detection)

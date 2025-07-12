@@ -6,15 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.bravy.app.data.repository.AuthRepository
+import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
 class PracticeViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val database: FirebaseDatabase
 ) : ViewModel() {
 
     private val _anxietyLevel = MutableLiveData<Result<String>>()
@@ -25,34 +28,26 @@ class PracticeViewModel @Inject constructor(
 
     fun loadAnxietyLevel() {
         _isLoading.postValue(true)
-        val startTime = System.currentTimeMillis()
         viewModelScope.launch {
             val currentUser = firebaseAuth.currentUser
             if (currentUser != null) {
-                // TODO: Replace with actual logic to fetch anxiety level from Firebase
-                // Example: Assume anxiety level is stored in user data or a separate collection
-                val result = try {
-                    // Mock implementation; replace with actual Firebase call
-                    Result.success("None")
+                try {
+                    // Ambil data dari Realtime Database
+                    val snapshot = database.reference.child("users")
+                        .child(currentUser.uid)
+                        .child("lastAnxietyLevel")
+                        .get().await()
+
+                    val level = snapshot.getValue(String::class.java) ?: "None"
+                    _anxietyLevel.postValue(Result.success(level))
                 } catch (e: Exception) {
-                    Result.failure(e)
+                    _anxietyLevel.postValue(Result.failure(e))
                 }
-                _anxietyLevel.postValue(result)
-                val elapsedTime = System.currentTimeMillis() - startTime
-                val remainingTime = 2000L - elapsedTime // Minimal 2 detik
-                if (remainingTime > 0) {
-                    delay(remainingTime)
-                }
-                _isLoading.postValue(false)
             } else {
                 _anxietyLevel.postValue(Result.failure(Exception("No user logged in")))
-                val elapsedTime = System.currentTimeMillis() - startTime
-                val remainingTime = 2000L - elapsedTime
-                if (remainingTime > 0) {
-                    delay(remainingTime)
-                }
-                _isLoading.postValue(false)
             }
+            delay(1500)
+            _isLoading.postValue(false)
         }
     }
 }

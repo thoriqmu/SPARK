@@ -1,7 +1,9 @@
 package com.bravy.app.ui.view.practice
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bravy.app.databinding.ActivityPracticeBinding
@@ -13,6 +15,18 @@ class PracticeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPracticeBinding
     private val viewModel: PracticeViewModel by viewModels()
+
+    private val anxietyTestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val anxietyLevel = result.data?.getStringExtra("ANXIETY_RESULT") ?: "None"
+            binding.tvTitle.text = anxietyLevel
+            Toast.makeText(this, "Test complete! Your level: $anxietyLevel", Toast.LENGTH_LONG).show()
+            // Opsi: Muat ulang data dari ViewModel untuk memastikan konsistensi
+            viewModel.loadAnxietyLevel()
+        } else {
+            Toast.makeText(this, "Anxiety test was cancelled.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +87,8 @@ class PracticeActivity : AppCompatActivity() {
 
         // Handle button clicks (example for btn_check and practice buttons)
         binding.btnCheck.setOnClickListener {
-            // TODO: Implement speech recording logic
-            Toast.makeText(this, "Record speech clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AnxietyTestActivity::class.java)
+            anxietyTestLauncher.launch(intent)
         }
 
         binding.btn1.setOnClickListener {
