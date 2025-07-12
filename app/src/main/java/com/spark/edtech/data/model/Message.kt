@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Message(
     val messageId: String = "",
-    val senderUid: String = "",
+    val sender_uid: String = "",
     val type: String = "text", // "text", "image", "audio"
     val content: String = "",
     val timestamp: Long = 0L,
-    val replyTo: String? = null
+    val reply_to: String? = null
 ) : Parcelable

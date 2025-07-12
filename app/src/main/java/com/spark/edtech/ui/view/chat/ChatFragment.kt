@@ -107,8 +107,8 @@ class ChatFragment : Fragment() {
                     viewModel.getLastMessage(chatId).observe(viewLifecycleOwner) { lastMessage ->
                         binding.recentChatText.text = when (lastMessage?.type) {
                             "text" -> lastMessage.content
-                            "image" -> "Image"
-                            "audio" -> "Audio"
+                            "image" -> "Image Media"
+                            "audio" -> "Audio Media"
                             else -> "No messages"
                         }
                     }

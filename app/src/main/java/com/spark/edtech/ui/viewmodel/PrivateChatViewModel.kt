@@ -62,11 +62,11 @@ class PrivateChatViewModel @Inject constructor(
                 val currentUser = firebaseAuth.currentUser
                 if (currentUser != null) {
                     val message = Message(
-                        senderUid = currentUser.uid,
+                        sender_uid = currentUser.uid,
                         type = "text",
                         content = content,
                         timestamp = System.currentTimeMillis(),
-                        replyTo = replyTo
+                        reply_to = replyTo
                     )
                     firebaseDataSource.sendMessage(chatId, message)
                     _sendMessageResult.value = Result.success(Unit)
@@ -102,11 +102,11 @@ class PrivateChatViewModel @Inject constructor(
                     val mediaName = "chat_${System.currentTimeMillis()}.${if (type == "image") "jpg" else "mp3"}"
                     val downloadUrl = firebaseDataSource.uploadChatMedia(mediaFile, mediaName)
                     val message = Message(
-                        senderUid = currentUser.uid,
+                        sender_uid = currentUser.uid,
                         type = type,
                         content = downloadUrl,
                         timestamp = System.currentTimeMillis(),
-                        replyTo = replyTo
+                        reply_to = replyTo
                     )
                     firebaseDataSource.sendMessage(chatId, message)
                     _sendMessageResult.value = Result.success(Unit)

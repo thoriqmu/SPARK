@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide
 import com.spark.edtech.R
 import com.spark.edtech.data.model.Message
 import com.spark.edtech.databinding.ItemMessageBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MessageAdapter(
     private val currentUserId: String,
@@ -28,46 +31,53 @@ class MessageAdapter(
 
     inner class MessageViewHolder(private val binding: ItemMessageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message) {
-            binding.tvMessageContent.visibility = if (message.type == "text") View.VISIBLE else View.GONE
-            binding.ivMessageImage.visibility = if (message.type == "image") View.VISIBLE else View.GONE
-            binding.llAudioContainer.visibility = if (message.type == "audio") View.VISIBLE else View.GONE
+            val isCurrentUser = message.sender_uid == currentUserId
 
-            // Adjust layout based on sender
-            val isCurrentUser = message.senderUid == currentUserId
-            binding.tvMessageContent.text = message.content
-            binding.tvTimestamp.text = android.text.format.DateFormat.format("HH:mm", message.timestamp)
-
-            val layoutParams = binding.tvMessageContent.layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
-            layoutParams.startToStart = if (isCurrentUser) androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.UNSET else androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
-            layoutParams.endToEnd = if (isCurrentUser) androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID else androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.UNSET
-            binding.tvMessageContent.layoutParams = layoutParams
-            binding.ivMessageImage.layoutParams = layoutParams
-            binding.llAudioContainer.layoutParams = layoutParams
-            binding.tvTimestamp.layoutParams = layoutParams
-
-            if (message.type == "image") {
-                Glide.with(binding.root.context)
-                    .load(message.content)
-                    .error(R.drawable.sample)
-                    .into(binding.ivMessageImage)
-            }
-
-            if (message.type == "audio") {
-                binding.tvAudioDuration.text = "0:00" // Placeholder, update with actual duration if available
-                binding.btnPlayAudio.setOnClickListener { onAudioClick(message.content) }
-            }
-
-            if (message.replyTo != null) {
-                binding.tvReplyContent.visibility = View.VISIBLE
-                binding.tvReplyContent.text = "Replying to: ${getReplyContent(message.replyTo)}"
+            // Tampilkan container yang sesuai dan sembunyikan yang lain
+            if (isCurrentUser) {
+                binding.clCurrentUserMessage.visibility = View.VISIBLE
+                binding.clOtherUserMessage.visibility = View.GONE
+                bindMessageContent(binding, message, true)
             } else {
-                binding.tvReplyContent.visibility = View.GONE
+                binding.clCurrentUserMessage.visibility = View.GONE
+                binding.clOtherUserMessage.visibility = View.VISIBLE
+                bindMessageContent(binding, message, false)
             }
         }
 
-        private fun getReplyContent(replyTo: String): String {
-            val replyMessage = currentList.find { it.messageId == replyTo }
-            return replyMessage?.content?.take(50) ?: "Message"
+        private fun bindMessageContent(binding: ItemMessageBinding, message: Message, isCurrentUser: Boolean) {
+            // Pilih view berdasarkan siapa pengirimnya
+            val tvMessageContent = if (isCurrentUser) binding.tvMessageContentCurrent else binding.tvMessageContentOther
+            val ivMessageImage = if (isCurrentUser) binding.ivMessageImageCurrent else binding.ivMessageImageOther
+            val llAudioContainer = if (isCurrentUser) binding.llAudioContainerCurrent else binding.llAudioContainerOther
+            val tvTimestamp = if (isCurrentUser) binding.tvTimestampCurrent else binding.tvTimestampOther
+            val tvReplyContent = if (isCurrentUser) binding.tvReplyContentCurrent else binding.tvReplyContentOther
+            val btnPlayAudio = if (isCurrentUser) binding.btnPlayAudioCurrent else binding.btnPlayAudioOther
+            val tvAudioDuration = if (isCurrentUser) binding.tvAudioDurationCurrent else binding.tvAudioDurationOther
+
+            // Atur visibilitas berdasarkan tipe pesan
+            tvMessageContent.visibility = if (message.type == "text") View.VISIBLE else View.GONE
+            ivMessageImage.visibility = if (message.type == "image") View.VISIBLE else View.GONE
+            llAudioContainer.visibility = if (message.type == "audio") View.VISIBLE else View.GONE
+
+            // Isi konten
+            when (message.type) {
+                "text" -> tvMessageContent.text = message.content
+                "image" -> {
+                    Glide.with(binding.root.context)
+                        .load(message.content)
+                        .error(R.drawable.sample) // Gambar fallback jika error
+                        .into(ivMessageImage)
+                }
+                "audio" -> {
+                    tvAudioDuration.text = "Audio" // Anda bisa menambahkan logika durasi di sini
+                    btnPlayAudio.setOnClickListener { onAudioClick(message.content) }
+                }
+            }
+
+            // Atur timestamp
+            val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+            tvTimestamp.text = sdf.format(Date(message.timestamp))
         }
     }
 

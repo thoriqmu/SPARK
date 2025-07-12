@@ -1,87 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/gradient"
-    android:padding="8dp">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_reply_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_current_user_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/chat_bubble"
-        android:padding="8dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:visibility="visible"
+        android:layout_marginStart="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_message_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/chat_bubble_reply"
-        android:padding="8dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_reply_content" />
-
-    <ImageView
-        android:id="@+id/iv_message_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/tv_message_content"
-        app:layout_constraintStart_toStartOf="@+id/tv_message_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_message_content" />
-
-    <LinearLayout
-        android:id="@+id/ll_audio_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/chat_bubble"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/tv_message_content"
-        app:layout_constraintStart_toStartOf="@+id/tv_message_content"
-        app:layout_constraintTop_toBottomOf="@+id/iv_message_image">
-
-        <ImageButton
-            android:id="@+id/btn_play_audio"
-            android:layout_width="42dp"
-            android:layout_height="37dp"
-            android:background="@color/transparent"
-            android:src="@drawable/ic_play" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_audio_duration"
+            android:id="@+id/tv_reply_content_current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:text="0:00"
+            android:background="@drawable/chat_bubble_reply"
+            android:padding="8dp"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:text="Ini adalah contoh balasan..."
+            tools:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <FrameLayout
+            android:id="@+id/fl_message_content_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_bubble_reply"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_reply_content_current">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_timestamp"
-        android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_message_content_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="Ini pesan dari pengguna saat ini." />
+
+            <ImageView
+                android:id="@+id/iv_message_image_current"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_audio_container_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <ImageButton
+                    android:id="@+id/btn_play_audio_current"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_play" />
+
+                <TextView
+                    android:id="@+id/tv_audio_duration_current"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@android:color/white"
+                    tools:text="0:15" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_timestamp_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_message_content_current"
+            tools:text="12:00 PM" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_other_user_message"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_message_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_message_content" />
+        android:layout_marginEnd="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_reply_content_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_bubble"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:text="Ini adalah contoh balasan..."
+            tools:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/fl_message_content_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_bubble"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_reply_content_other">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_message_content_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="Ini pesan dari pengguna saat ini." />
+
+            <ImageView
+                android:id="@+id/iv_message_image_other"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_audio_container_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <ImageButton
+                    android:id="@+id/btn_play_audio_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_play" />
+
+                <TextView
+                    android:id="@+id/tv_audio_duration_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@android:color/white"
+                    tools:text="0:15" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_timestamp_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fl_message_content_other"
+            tools:text="12:00 PM" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
